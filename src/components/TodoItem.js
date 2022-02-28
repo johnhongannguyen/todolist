@@ -1,11 +1,13 @@
 import React from 'react'
 import styled from 'styled-components'
-const TodoItem = () => {
+
+const TodoItem = ({todo}) => {
     return (
     
         <TodoListItem>
       <Checkbox className='far fa-circle' />
-      <input />
+      <input style={{textDecoration:''}} value={todo}/>
+
       <SaveTodo className='fa-solid fa-check' />
       <DeleteItem className= 'fa-solid fa-trash-can'/>
         </TodoListItem>
@@ -30,7 +32,7 @@ const TodoListItem= styled.div`
         background: none;
         border: none;
         color: #eee;
-        text-decoration: line-through
+        // text-decoration: line-through
     }
 `
 

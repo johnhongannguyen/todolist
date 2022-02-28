@@ -2,6 +2,7 @@ import './App.css';
 import styled from 'styled-components';
 import Header from './components/Header';
 import TodoItem from './components/TodoItem';
+import TodoList from './components/TodoList';
 
 function App() {
   
@@ -13,8 +14,7 @@ function App() {
       <TodoContent>
         <Title>Dashboard</Title>
         <Greeting>Good Morning, John</Greeting>
-        {[<h2>Cooking</h2>, <h2>Reading</h2>]}
-        <TodoItem />
+        <TodoList />
       </TodoContent>
       </MainContent>
     </Main>
