@@ -1,15 +1,22 @@
 import React from 'react'
 import styled from 'styled-components'
 
-const TodoItem = ({todo}) => {
+const TodoItem = ({todo, todos, setTodos}) => {
+
+    const deleteHandler = () =>{
+        const currentTodoId = todo.id;
+        setTodos(todos.filter(todo => todo.id !== currentTodoId))
+        console.log(todos);
+    }
+
     return (
     
         <TodoListItem>
       <Checkbox className='far fa-circle' />
-      <input style={{textDecoration:''}} value={todo}/>
+      <input style={{textDecoration:''}} value={todo.title}/>
 
       <SaveTodo className='fa-solid fa-check' />
-      <DeleteItem className= 'fa-solid fa-trash-can'/>
+      <DeleteItem className= 'fa-solid fa-trash-can' onClick={deleteHandler}/>
         </TodoListItem>
         
     )
