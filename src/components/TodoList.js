@@ -9,6 +9,7 @@ const TodoList = () => {
     const addButtonHandler = () =>{
         console.log('addButton Handler');
         console.log(todo);
+        if(todo.length >0){
         setTodos([{
             id: todos.length,
             title: todo,
@@ -16,7 +17,7 @@ const TodoList = () => {
         },...todos]);
         console.log(todos)
         setTodo('');
-       
+        }
     }
     return (
         <Wrapper>

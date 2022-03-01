@@ -1,22 +1,44 @@
-import React from 'react'
+import React,{useState,useEffect} from 'react'
 import styled from 'styled-components'
 
 const TodoItem = ({todo, todos, setTodos}) => {
-
+    const [editedTodo, setEditedTodo] = useState(todo.title);
+    
+    useEffect(() =>{
+        setEditedTodo(todo.title);
+    },[todo])
     const deleteHandler = () =>{
         const currentTodoId = todo.id;
         setTodos(todos.filter(todo => todo.id !== currentTodoId))
         console.log(todos);
     }
 
+    const saveTodo = () =>{
+        const currentTodoId = todo.id;
+        setTodos(todos.map(
+            todo => todo.id === currentTodoId ? {...todo,title:editedTodo} : todo
+        ))
+    }
+
+    const completeTodo = () =>{
+        const currentTodoId = todo.id;
+        setTodos(todos.map (todo => 
+            todo.id === currentTodoId ? {...todo,completed: !todo.completed} : todo
+        ))
+    }
     return (
     
         <TodoListItem>
-      <Checkbox className='far fa-circle' />
-      <input style={{textDecoration:''}} value={todo.title}/>
+      <Checkbox className={todo.completed ? 'fas fa-check-circle' : 'far fa-circle'} onClick={completeTodo}/>
+      <input 
+      style={{textDecoration: todo.completed ? 'line-through' : 'none'}} 
+      value={editedTodo} 
+      onChange={e => setEditedTodo(e.target.value)}/>
 
-      <SaveTodo className='fa-solid fa-check' />
-      <DeleteItem className= 'fa-solid fa-trash-can' onClick={deleteHandler}/>
+      <SaveTodo className='fa-solid fa-check'  onClick={saveTodo} />
+      <DeleteItem 
+      className= 'fa-solid fa-trash-can' 
+      onClick={deleteHandler}/>
         </TodoListItem>
         
     )
