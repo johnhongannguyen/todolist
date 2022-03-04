@@ -1,20 +1,55 @@
 import './App.css';
 import styled from 'styled-components';
 import Header from './components/Header';
-import TodoItem from './components/TodoItem';
 import TodoList from './components/TodoList';
+import Sidebar from './components/Sidebar';
+import {useState} from 'react'
 
 function App() {
-  
+  const [sideBarToggle, setSideBarToggle] = useState(true);
+
+  const todoList = [
+    {
+      name:'Personal',
+      color: '#fd76a1',
+      icon: 'fas fa-user'
+    },
+    {
+      name:'Work',
+      color: '#70c4be',
+      icon: 'fas fa-briefcase'
+    },
+    {
+      name:'Coding',
+      color: '#ab6ddf',
+      icon: 'fas fa-file-code'
+    }
+  ]
+
   return (
     <Wrapper>
-    <Header />
+    <Header 
+    sideBarToggle={sideBarToggle} 
+    setSideBarToggle= {setSideBarToggle}/>
     <Main>
-      <MainContent>
+      <Sidebar sideBarToggle={sideBarToggle} todoList={todoList}/>
+      <MainContent 
+      style={{
+        width: `calc(100vw -(${sideBarToggle ? '300px' : '70px'}))`,
+      }}
+      >
       <TodoContent>
         <Title>Dashboard</Title>
         <Greeting>Good Morning, John</Greeting>
-        <TodoList />
+        {todoList.map(category => (
+            <TodoList 
+              key={category.name}
+              name={category.name}
+              color={category.color}
+              icon={category.icon}
+            />
+        ))}
+        
       </TodoContent>
       </MainContent>
     </Main>
@@ -35,15 +70,15 @@ const Main = styled.div`
   display: flex;
 `
 const MainContent = styled.div`
-  width: 100vw;
   display: flex;
   justify-content: center;
   transition: 0.3s;
+  
 `
 const TodoContent = styled.div`
   max-width: 700px;
   width: 100%;
-
+  padding-left: 100px;
 `
 
 const Title = styled.div`

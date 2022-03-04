@@ -1,7 +1,7 @@
 import React,{useState,useEffect} from 'react'
 import styled from 'styled-components'
 
-const TodoItem = ({todo, todos, setTodos}) => {
+const TodoItem = ({todo, todos, setTodos,color}) => {
     const [editedTodo, setEditedTodo] = useState(todo.title);
     
     useEffect(() =>{
@@ -29,13 +29,17 @@ const TodoItem = ({todo, todos, setTodos}) => {
     return (
     
         <TodoListItem>
-      <Checkbox className={todo.completed ? 'fas fa-check-circle' : 'far fa-circle'} onClick={completeTodo}/>
+      <Checkbox 
+      className={todo.completed ? 'fas fa-check-circle' : 'far fa-circle'} 
+      onClick={completeTodo}
+      style={{color:color}}
+      />
       <input 
       style={{textDecoration: todo.completed ? 'line-through' : 'none'}} 
       value={editedTodo} 
       onChange={e => setEditedTodo(e.target.value)}/>
 
-      <SaveTodo className='fa-solid fa-check'  onClick={saveTodo} />
+      {todo.title !== editedTodo && (<SaveTodo className='fa-solid fa-check'  onClick={saveTodo} />)}
       <DeleteItem 
       className= 'fa-solid fa-trash-can' 
       onClick={deleteHandler}/>

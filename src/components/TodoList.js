@@ -2,7 +2,7 @@ import React, {useState} from 'react';
 import TodoItem from './TodoItem'
 import styled from 'styled-components'
 
-const TodoList = () => {
+const TodoList = ({name,color, icon}) => {
     const [todo,setTodo] = useState('');
     const [todos,setTodos] = useState([]);
 
@@ -22,16 +22,21 @@ const TodoList = () => {
     return (
         <Wrapper>
             <TodoCategoryHeader>
-                <CategoryIcon style={{background:'#FD76A1'}}>
-                    <i className={'fas fa-user'}/>
+                <CategoryIcon style={{background:color}}>
+                    <i className={icon}/>
                 </CategoryIcon>
-                <Title>Personal</Title>
+                <Title>{name}</Title>
                 <TodoInput value={todo} onChange={e => setTodo(e.target.value)}/> 
                 <AddTodo  className='fas fa-plus' onClick={addButtonHandler}/>
          </TodoCategoryHeader>
        {todos.map((todo,index) => (
            
-           <TodoItem key={index} todo={todo} todos={todos} setTodos={setTodos}/>
+           <TodoItem 
+           key={index} 
+           todo={todo} 
+           todos={todos} 
+           setTodos={setTodos} 
+           color={color} />
        ))}
        </Wrapper>
     )
